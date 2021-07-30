@@ -12,10 +12,10 @@ interface RequestInterface
     const VERB_PATCH = 'PATCH';
     const VERB_OPTIONS = 'OPTIONS';
 
-    public function head($url, array $args = array());
-    public function get($url, array $args = array());
-    public function post($url, array $args = array());
-    public function put($url, array $args = array());
-    public function patch($url, array $args = array());
-    public function execute($url, array $args = array());
+    public function head($url, array $args = []);
+    public function get($url, array $args = []);
+    public function post($url, array $args = []);
+    public function put($url, array $args = []);
+    public function patch($url, array $args = []);
+    public function execute($url, array $args = []);
 }

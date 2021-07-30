@@ -1,8 +1,11 @@
 {
   "name": "cyclonecode/plugin",
   "type": "library",
-  "version": "1.0.8",
-  "keywords": ["wordpress", "plugin", "settings", "widget", "singleton", "components"],
+  "version": "1.0.9",
+  "require": {
+    "php": "^7.0"
+  },
+  "keywords": ["wordpress", "plugin", "http", "logging", "cache", "settings", "widget", "singleton", "components"],
   "description": "Class for use when building wordpress plugins.",
   "time": "2021-02-15",
   "license": "GPL-2.0-or-later",

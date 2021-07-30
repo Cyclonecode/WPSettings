@@ -12,9 +12,9 @@ abstract class Widget extends \WP_Widget
         parent::__construct(
             $this->name,
             $this->title,
-            array(
+            [
                 'description' => $this->description,
-            )
+            ]
         );
 
         $this->register();
@@ -42,10 +42,13 @@ abstract class Widget extends \WP_Widget
         extract($args);
 
         // Before widget.
+        /** @var string $before_widget */
         echo $before_widget;
 
         // Display title if not empty.
         if (!empty($instance['title'])) {
+            /** @var string $before_title */
+            /** @var string $after_title */
             echo $before_title . apply_filters('widgets_title', $instance['title']) . $after_title;
         }
 
@@ -53,6 +56,7 @@ abstract class Widget extends \WP_Widget
         $this->render($instance);
 
         // After widget.
+        /** @var string $after_widget */
         echo $after_widget;
     }
 }

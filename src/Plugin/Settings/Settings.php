@@ -16,14 +16,14 @@ class Settings implements \IteratorAggregate, \Countable, \ArrayAccess
      *
      * @var array $settings
      */
-    protected $settings = array();
+    protected $settings = [];
 
     /**
      * Version
      *
      * @var string
      */
-    public $version = '1.0.6';
+    public $version = '1.0.7';
 
     /**
      * Settings constructor.
@@ -39,7 +39,7 @@ class Settings implements \IteratorAggregate, \Countable, \ArrayAccess
     /**
      * @return array
      */
-    public function toOptionsArray()
+    public function toOptionsArray(): array
     {
         return $this->settings;
     }
@@ -55,7 +55,7 @@ class Settings implements \IteratorAggregate, \Countable, \ArrayAccess
     /**
      * @return string
      */
-    public function toYaml()
+    public function toYaml(): string
     {
         return function_exists('yaml_emit') ? yaml_emit($this->settings) : '';
     }
@@ -65,7 +65,7 @@ class Settings implements \IteratorAggregate, \Countable, \ArrayAccess
      *
      * @return string
      */
-    public function getOptionName()
+    public function getOptionName(): string
     {
         return $this->optionName;
     }
@@ -75,7 +75,7 @@ class Settings implements \IteratorAggregate, \Countable, \ArrayAccess
      *
      * @return string
      */
-    public function getVersion()
+    public function getVersion(): string
     {
         return $this->version;
     }
@@ -84,10 +84,10 @@ class Settings implements \IteratorAggregate, \Countable, \ArrayAccess
      * Delete this setting from database.
      * @return $this
      */
-    public function delete()
+    public function delete(): Settings
     {
         delete_option($this->optionName);
-        $this->settings = array();
+        $this->settings = [];
         return $this;
     }
 
@@ -101,7 +101,7 @@ class Settings implements \IteratorAggregate, \Countable, \ArrayAccess
      *   The value to set.
      * @return $this
      */
-    public function __set($name, $value)
+    public function __set(string $name, $value)
     {
         return $this->set($name, $value);
     }
@@ -115,7 +115,7 @@ class Settings implements \IteratorAggregate, \Countable, \ArrayAccess
      *   The value to set.
      * @return $this;
      */
-    public function set($name, $value)
+    public function set(string $name, $value): Settings
     {
         $this->settings[$name] = $value;
         return $this;
@@ -127,7 +127,7 @@ class Settings implements \IteratorAggregate, \Countable, \ArrayAccess
      * @param array $settings
      * @return $this
      */
-    public function setFromArray(array $settings)
+    public function setFromArray(array $settings): Settings
     {
         foreach ($settings as $key => $value) {
             $this->set($key, $value);
@@ -138,10 +138,10 @@ class Settings implements \IteratorAggregate, \Countable, \ArrayAccess
     /**
      * Check if a setting isset.
      *
-     * @param $key
+     * @param string $key
      * @return bool
      */
-    public function hasKey($key)
+    public function hasKey(string $key): bool
     {
         return $this->__isset($key);
     }
@@ -149,10 +149,10 @@ class Settings implements \IteratorAggregate, \Countable, \ArrayAccess
     /**
      * Check if a setting isset.
      *
-     * @param $key
+     * @param string $key
      * @return bool
      */
-    public function has($key)
+    public function has(string $key): bool
     {
         return $this->__isset($key);
     }
@@ -160,10 +160,10 @@ class Settings implements \IteratorAggregate, \Countable, \ArrayAccess
     /**
      * Check if a setting isset.
      *
-     * @param $key
+     * @param string $key
      * @return bool
      */
-    public function __isset($key)
+    public function __isset(string $key)
     {
         return isset($this->settings[$key]);
     }
@@ -177,7 +177,7 @@ class Settings implements \IteratorAggregate, \Countable, \ArrayAccess
      *   Value to add.
      * @return $this
      */
-    public function add($name, $value)
+    public function add(string $name, $value): Settings
     {
         if (!isset($this->settings[$name])) {
             $this->set($name, $value);
@@ -193,7 +193,7 @@ class Settings implements \IteratorAggregate, \Countable, \ArrayAccess
      *
      * @return mixed
      */
-    public function __get($name)
+    public function __get(string $name)
     {
         return $this->get($name);
     }
@@ -208,9 +208,9 @@ class Settings implements \IteratorAggregate, \Countable, \ArrayAccess
      *
      * @return mixed
      */
-    public function get($name, $default = null)
+    public function get(string $name, $default = null)
     {
-        return (isset($this->settings[$name]) ? $this->settings[$name] : $default);
+        return $this->settings[$name] ?? $default;
     }
 
     /**
@@ -220,7 +220,7 @@ class Settings implements \IteratorAggregate, \Countable, \ArrayAccess
      * @param int $index
      * @return mixed
      */
-    public function getFromArray($name, $index)
+    public function getFromArray(string $name, int $index)
     {
         $value = $this->get($name);
         if (is_array($value) && count($value) >= $index) {
@@ -234,7 +234,7 @@ class Settings implements \IteratorAggregate, \Countable, \ArrayAccess
      * @param string $name
      *   Name of setting to remove.
      */
-    public function __unset($name)
+    public function __unset(string $name)
     {
         $this->remove($name);
     }
@@ -246,7 +246,7 @@ class Settings implements \IteratorAggregate, \Countable, \ArrayAccess
      *   Name of setting to remove.
      * @return $this
      */
-    public function remove($name)
+    public function remove(string $name): Settings
     {
         unset($this->settings[$name]);
         return $this;
@@ -261,7 +261,7 @@ class Settings implements \IteratorAggregate, \Countable, \ArrayAccess
      *   New name for setting.
      * @return $this
      */
-    public function rename($from, $to)
+    public function rename(string $from, string $to): Settings
     {
         if (isset($this->settings[$from])) {
             $this->settings[$to] = $this->settings[$from];
@@ -274,7 +274,7 @@ class Settings implements \IteratorAggregate, \Countable, \ArrayAccess
      * Load settings from database.
      * @return $this
      */
-    public function load()
+    public function load(): Settings
     {
         $this->settings = get_option($this->optionName);
         return $this;
@@ -285,7 +285,7 @@ class Settings implements \IteratorAggregate, \Countable, \ArrayAccess
      *
      * @return bool
      */
-    public function save()
+    public function save(): bool
     {
         ksort($this->settings);
         return update_option($this->optionName, $this->settings);
@@ -294,11 +294,11 @@ class Settings implements \IteratorAggregate, \Countable, \ArrayAccess
     /**
      * Save settings to file.
      *
-     * @param $filename
+     * @param string $filename
      * @param string $format
      * @return false|int
      */
-    public function saveToFile($filename, $format = 'json')
+    public function saveToFile(string $filename, string $format = 'json')
     {
         $content = '';
         switch ($format) {
@@ -322,7 +322,7 @@ class Settings implements \IteratorAggregate, \Countable, \ArrayAccess
      *   An array which keys will be used to validate the current settings keys.
      * @return $this
      */
-    public function clean(array $options)
+    public function clean(array $options): Settings
     {
         if (is_array($options)) {
             foreach ($options as $key => $value) {

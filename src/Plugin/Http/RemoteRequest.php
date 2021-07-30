@@ -11,15 +11,15 @@ class RemoteRequest extends AbstractRequest
      * @return Response
      * @throws \Exception
      */
-    public function execute($url, array $args = array())
+    public function execute($url, array $args = [])
     {
-        $defaults = array(
+        $defaults = [
             'method' => self::VERB_GET,
             'timeout' => self::CURL_TIMEOUT,
-        );
+        ];
         $args = array_merge($defaults, $args);
         $response = wp_safe_remote_request($url, $args);
-        if (!is_wp_error($response) && in_array(wp_remote_retrieve_response_code($response), array(200, 201))) {
+        if (!is_wp_error($response) && in_array(wp_remote_retrieve_response_code($response), [200, 201])) {
             $result = new Response(
                 wp_remote_retrieve_body($response),
                 wp_remote_retrieve_headers($response),

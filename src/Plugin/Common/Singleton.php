@@ -7,7 +7,7 @@ abstract class Singleton
     /**
      * @var array $instance
      */
-    protected static $instance = array();
+    protected static $instance = [];
 
     /**
      * @return mixed
