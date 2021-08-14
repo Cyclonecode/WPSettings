@@ -11,7 +11,7 @@ class RemoteRequest extends AbstractRequest
      * @return Response
      * @throws \Exception
      */
-    public function execute($url, array $args = [])
+    public function execute($url, array $args = []): Response
     {
         $defaults = [
             'method' => self::VERB_GET,

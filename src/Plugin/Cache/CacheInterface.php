@@ -8,24 +8,25 @@ interface CacheInterface
      * @param string $key
      * @return mixed
      */
-    public function get($key);
+    public function get(string $key);
 
     /**
      * @param string $key
      * @param mixed $value
+     * @param int $ttl
      * @return mixed
      */
-    public function set($key, $value, $ttl = 0);
+    public function set(string $key, $value, int $ttl = 0);
 
     /**
      * @param string $key
      * @return mixed
      */
-    public function delete($key);
+    public function delete(string $key);
 
     /**
      * @param string $key
      * @return mixed
      */
-    public function exists($key);
+    public function exists(string $key);
 }

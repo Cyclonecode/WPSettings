@@ -36,6 +36,9 @@ abstract class Singleton
     {
     }
 
+    /**
+     * @throws \Exception
+     */
     final public function __wakeup()
     {
         throw new \Exception('Cannot unserialize a singleton');

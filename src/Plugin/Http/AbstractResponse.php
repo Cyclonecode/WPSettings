@@ -5,7 +5,7 @@ namespace Cyclonecode\Plugin\Http;
 abstract class AbstractResponse implements ResponseInterface
 {
     /** @var array */
-    private $headers;
+    private $headers = [];
 
     /** @var string */
     private $body;
@@ -13,24 +13,24 @@ abstract class AbstractResponse implements ResponseInterface
     /** @var int */
     private $httpCode;
 
-    public function __construct($body, $headers, $httpCode)
+    public function __construct(string $body, array $headers, int $httpCode)
     {
         $this->body = $body;
         $this->headers = $headers;
         $this->httpCode = $httpCode;
     }
 
-    public function getHeaders()
+    public function getHeaders(): array
     {
         return $this->headers;
     }
 
-    public function getHeader($name)
+    public function getHeader(string $name)
     {
-        return isset($this->headers[$name]) ? $this->headers[$name] : null;
+        return $this->headers[$name] ?? null;
     }
 
-    public function getBody()
+    public function getBody(): string
     {
         return $this->body;
     }
@@ -40,7 +40,7 @@ abstract class AbstractResponse implements ResponseInterface
         return json_decode($this->body);
     }
 
-    public function getHttpCode()
+    public function getHttpCode(): int
     {
         return $this->httpCode;
     }

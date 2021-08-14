@@ -11,7 +11,7 @@ abstract class AbstractRequest implements RequestInterface
      * @param array $args
      * @return mixed|null
      */
-    public function head($url, array $args = [])
+    public function head(string $url, array $args = [])
     {
         return $this->execute($url, ['method' => self::VERB_HEAD] + $args);
     }
@@ -23,7 +23,7 @@ abstract class AbstractRequest implements RequestInterface
      * @param array $args
      * @return mixed|null
      */
-    public function get($url, array $args = [])
+    public function get(string $url, array $args = [])
     {
         return $this->execute($url, ['method' => self::VERB_GET] + $args);
     }
@@ -35,7 +35,7 @@ abstract class AbstractRequest implements RequestInterface
      * @param array $args
      * @return mixed|null
      */
-    public function post($url, array $args = [])
+    public function post(string $url, array $args = [])
     {
         return $this->execute($url, ['method' => self::VERB_POST] + $args);
     }
@@ -47,7 +47,7 @@ abstract class AbstractRequest implements RequestInterface
      * @param array $args
      * @return mixed|null
      */
-    public function put($url, array $args = [])
+    public function put(string $url, array $args = [])
     {
         return $this->execute($url, ['method' => self::VERB_PUT] + $args);
     }
@@ -59,7 +59,7 @@ abstract class AbstractRequest implements RequestInterface
      * @param array $args
      * @return mixed|null
      */
-    public function patch($url, array $args = [])
+    public function patch(string $url, array $args = [])
     {
         return $this->execute($url, ['method' => self::VERB_PATCH] + $args);
     }

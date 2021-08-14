@@ -10,5 +10,5 @@ interface LoggerInterface
     const WARNING = 4;
     const CRITICAL = 5;
 
-    public function log($message);
+    public function log(string $message);
 }

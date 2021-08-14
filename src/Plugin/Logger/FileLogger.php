@@ -7,17 +7,17 @@ class FileLogger extends AbstractLogger
     private $logFile = 'log.txt';
     private $format = 'Y-m-d H:i:s';
 
-    public function setDateFormat($format)
+    public function setDateFormat(string $format)
     {
         $this->format = $format;
     }
 
-    public function setLogFile($file)
+    public function setLogFile(string $file)
     {
         $this->logFile = $file;
     }
 
-    protected function addEntry($level, $message)
+    protected function addEntry(int $level, string $message)
     {
         $trace = debug_backtrace();
         $context = $trace[1];
@@ -30,22 +30,22 @@ class FileLogger extends AbstractLogger
         }
     }
 
-    public function log($message)
+    public function log(string $message)
     {
         $this->addEntry(self::LOG, $message);
     }
 
-    public function debug($message)
+    public function debug(string $message)
     {
         $this->addEntry(self::DEBUG, $message);
     }
 
-    public function warn($message)
+    public function warn(string $message)
     {
         $this->addEntry(self::WARNING, $message);
     }
 
-    public function notice($message)
+    public function notice(string $message)
     {
         $this->addEntry(self::NOTICE, $message);
     }

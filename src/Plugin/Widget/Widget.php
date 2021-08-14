@@ -36,7 +36,7 @@ abstract class Widget extends \WP_Widget
      * @param array $args
      * @param array $instance
      */
-    public function widget($args, $instance)
+    public function widget(array $args, array $instance)
     {
         // Add arguments to widget.
         extract($args);
